@@ -1,1 +1,1 @@
-# hello-cli
+# ascii-art

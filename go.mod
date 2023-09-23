@@ -1,4 +1,4 @@
-module github.com/Minooo1/hello-cli
+module github.com/Minooo1/ascii-art
 
 go 1.20
 
