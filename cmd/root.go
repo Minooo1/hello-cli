@@ -9,6 +9,7 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
+	"golang.org/x/term"
 )
 
 // rootCmd represents the base command when called without any subcommands
@@ -17,22 +18,41 @@ var rootCmd = &cobra.Command{
 	Short: "This is a command to display various Ascii art.",
 }
 
+func GetWindowSize(fd int) (width, height int, err error) {
+	width, height, err = term.GetSize(fd)
+	return width, height, err
+}
+
 // Execute adds all child commands to the root command and sets flags appropriately.
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
 	err := rootCmd.Execute()
 
-	argsCount := len(os.Args)
+	width, _, err := GetWindowSize(int(os.Stdin.Fd()))
 
-	if argsCount == 1 {
-		// main.go の時だけ実行する
-		b, err := os.ReadFile("asciiArt/welcome.txt")
+	var global []byte
+
+	if width > 120 {
+		b, err := os.ReadFile("asciiArt/300/welcome.txt")
+		global = b
 
 		if err != nil {
 			fmt.Println(err)
 		}
+	} else {
+		b, err := os.ReadFile("asciiArt/100/welcome.txt")
+		global = b
 
-		fmt.Println(string(b))
+		if err != nil {
+			fmt.Println(err)
+		}
+	}
+
+	argsCount := len(os.Args)
+
+	if argsCount == 1 {
+		// main.go の時だけ実行する
+		fmt.Println(string(global))
 	}
 
 	if err != nil {
