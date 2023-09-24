@@ -28,37 +28,23 @@ func GetWindowSize(fd int) (width, height int, err error) {
 func Execute() {
 	err := rootCmd.Execute()
 
-	width, _, err := GetWindowSize(int(os.Stdin.Fd()))
-
-	var global []byte
-
-	if width > 120 {
-		b, err := os.ReadFile("asciiArt/300/welcome.txt")
-		global = b
-
-		if err != nil {
-			fmt.Println(err)
-		}
-	} else {
-		b, err := os.ReadFile("asciiArt/100/welcome.txt")
-		global = b
-
-		if err != nil {
-			fmt.Println(err)
-		}
-	}
+	// width, _, err := GetWindowSize(int(os.Stdin.Fd()))
 
 	argsCount := len(os.Args)
 
 	if argsCount == 1 {
 		// main.go の時だけ実行する
-		fmt.Println(string(global))
+		b, err := os.ReadFile("asciiArt/welcome.txt")
+		fmt.Println(string(b))
+
+		if err != nil {
+			os.Exit(1)
+		}
 	}
 
 	if err != nil {
 		os.Exit(1)
 	}
-
 }
 
 func init() {
