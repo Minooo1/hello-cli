@@ -16,7 +16,7 @@ var squidCmd = &cobra.Command{
 	Use:   "squid",
 	Short: "Print the funny ascii art of squid",
 	Run: func(cmd *cobra.Command, args []string) {
-		b, err := os.ReadFile("askiiArt/squid.txt")
+		b, err := os.ReadFile("asciiArt/squid.txt")
 
 		if err != nil {
 			fmt.Println(err)

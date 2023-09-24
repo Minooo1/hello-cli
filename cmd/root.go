@@ -26,7 +26,7 @@ func Execute() {
 
 	if argsCount == 1 {
 		// main.go の時だけ実行する
-		b, err := os.ReadFile("askiiArt/welcome.txt")
+		b, err := os.ReadFile("asciiArt/welcome.txt")
 
 		if err != nil {
 			fmt.Println(err)
