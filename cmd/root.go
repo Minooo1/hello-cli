@@ -21,17 +21,24 @@ var rootCmd = &cobra.Command{
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
 	err := rootCmd.Execute()
+
+	argsCount := len(os.Args)
+
+	if argsCount == 1 {
+		// main.go の時だけ実行する
 		b, err := os.ReadFile("askiiArt/welcome.txt")
 
 		if err != nil {
 			fmt.Println(err)
 		}
 
-		if err != nil {
-			os.Exit(1)
-		}
-
 		fmt.Println(string(b))
+	}
+
+	if err != nil {
+		os.Exit(1)
+	}
+
 }
 
 func init() {
