@@ -31,11 +31,10 @@ var rootCmd = &cobra.Command{
 
 			defer file.Close()
 
-			// ファイルを読み込んで出力
 			buf := new(bytes.Buffer)
 			buf.ReadFrom(file)
 
-			fmt.Printf(buf.String())
+			fmt.Print(buf.String())
 		}
 	},
 }

@@ -5,9 +5,10 @@ Copyright © 2023 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
+	"bytes"
 	"fmt"
-	"os"
 
+	"github.com/Minooo1/ascii-art/asciiArt"
 	"github.com/spf13/cobra"
 )
 
@@ -15,14 +16,23 @@ import (
 var squidCmd = &cobra.Command{
 	Use:   "squid",
 	Short: "Print the funny ascii art of squid",
-	Run: func(cmd *cobra.Command, args []string) {
-		b, err := os.ReadFile("asciiArt/squid.txt")
+	RunE: func(cmd *cobra.Command, args []string) error {
+
+		file, err := asciiArt.AsciiArt.Open("squid.txt")
 
 		if err != nil {
 			fmt.Println(err)
+			return err
 		}
 
-		fmt.Print(string(b))
+		defer file.Close()
+
+		buf := new(bytes.Buffer)
+		buf.ReadFrom(file)
+
+		fmt.Print(buf.String())
+
+		return nil
 	},
 }
 
