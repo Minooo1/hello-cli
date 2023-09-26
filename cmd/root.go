@@ -5,9 +5,11 @@ Copyright © 2023 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
+	"bytes"
 	"fmt"
 	"os"
 
+	"github.com/Minooo1/ascii-art/asciiArt"
 	"github.com/spf13/cobra"
 	"golang.org/x/term"
 )
@@ -16,6 +18,26 @@ import (
 var rootCmd = &cobra.Command{
 	Use:   "ascii-art",
 	Short: "This is a command to display various Ascii art.",
+	Run: func(cmd *cobra.Command, args []string) {
+		argsCount := len(os.Args)
+
+		if argsCount == 1 {
+			// main.go の時だけ実行する
+			file, err := asciiArt.AsciiArt.Open("welcome.txt")
+
+			if err != nil {
+				fmt.Println(err)
+			}
+
+			defer file.Close()
+
+			// ファイルを読み込んで出力
+			buf := new(bytes.Buffer)
+			buf.ReadFrom(file)
+
+			fmt.Printf(buf.String())
+		}
+	},
 }
 
 func GetWindowSize(fd int) (width, height int, err error) {
@@ -29,18 +51,6 @@ func Execute() {
 	err := rootCmd.Execute()
 
 	// width, _, err := GetWindowSize(int(os.Stdin.Fd()))
-
-	argsCount := len(os.Args)
-
-	if argsCount == 1 {
-		// main.go の時だけ実行する
-		b, err := os.ReadFile("asciiArt/welcome.txt")
-		fmt.Println(string(b))
-
-		if err != nil {
-			os.Exit(1)
-		}
-	}
 
 	if err != nil {
 		os.Exit(1)
