@@ -34,12 +34,14 @@ $ ascii-art -h
 This is a command to display various Ascii art.
 
 Usage:
+  ascii-art [flags]
   ascii-art [command]
 
 Available Commands:
   completion  Generate the autocompletion script for the specified shell
   help        Help about any command
   squid       Print the funny ascii art of squid
+  version     Show the ascii-art version information
 
 Flags:
   -h, --help     help for ascii-art
