@@ -17,7 +17,6 @@ var squidCmd = &cobra.Command{
 	Use:   "squid",
 	Short: "Print the funny ascii art of squid",
 	RunE: func(cmd *cobra.Command, args []string) error {
-
 		file, err := asciiArt.AsciiArt.Open("squid.txt")
 
 		if err != nil {

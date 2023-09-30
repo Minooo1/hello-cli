@@ -20,7 +20,6 @@ var rootCmd = &cobra.Command{
 	Short: "This is a command to display various Ascii art.",
 	Run: func(cmd *cobra.Command, args []string) {
 		argsCount := len(os.Args)
-
 		if argsCount == 1 {
 			// main.go の時だけ実行する
 			file, err := asciiArt.AsciiArt.Open("welcome.txt")
