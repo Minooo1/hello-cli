@@ -10,7 +10,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var Version string
+var Version  = "unset"
 
 // versionCmd represents the version command
 var versionCmd = &cobra.Command{

@@ -9,6 +9,8 @@ builds:
       - linux
       - windows
       - darwin
+    ldflags:
+      - -X github.com/Minooo1/ascii-art/cmd.Version={{.Version}}
 
 archives:
   - format: tar.gz
