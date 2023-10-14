@@ -6,4 +6,5 @@
   // タイムゾーンを指定
   timezone: "Asia/Tokyo",
   dependencyDashboard: false,
+  prHourlyLimit: 5,
 }
